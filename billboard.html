@@ -8,19 +8,40 @@
   </head>
   <body>
     <div class="navbar">
-        <a href="index.html" class="name">RACHEL YAN</a>
-  
-        <!-- Hamburger icon -->
-        <div class="menu-toggle" id="menu-toggle">☰</div>
-  
-        <nav class="nav">
-          <a href="index.html">Work</a>
-          <a href="play.html">Play</a>
-          <a href="about.html">About</a>
-          <a href="contact.html">Contact</a>
-        </nav>
-      </div>
+      <a href="index.html" class="name">RACHEL YAN</a>
+
+      <!-- Hamburger icon -->
+      <div class="menu-toggle" id="menu-toggle">☰</div>
+
+      <nav class="nav">
+        <a href="index.html">Work</a>
+        <a href="play.html">Play</a>
+        <a href="about.html">About</a>
+      </nav>
     </div>
+
+    <!-- === ABOUT POPUP === -->
+<div class="about-popup" id="about-popup">
+  <div class="about-content">
+    <button class="close-btn" id="close-about">×</button>
+    <h1>Hi, I'm Rachel Yan!</h1>
+    <p>
+      I'm a Junior at Parsons School of Design, majoring in Communication Design 
+      and minoring in Economics. I'm a designer and creative coder, with a love/fear/fascination with technology,
+       resulting in an insatiable need to experiment with new techniques and technologies in order to expand my design toolkit. My work 
+      is focused on using interactivity in its various forms to create engaging and unique experiences.  
+      I love monospaced fonts and cats as well. 
+      
+      <br><br> Let's work together! You can find me at:
+      <br>
+      <a href="https://www.linkedin.com/in/rachelyan/">LinkedIn</a>
+      <br>
+      <a href="https://www.instagram.com/rachelyan/">Email</a>
+      <br>
+      <a href="https://github.com/ruixyan">GitHub</a>
+    </p>
+  </div>
+</div>
 
     <div class="case-study-container">
       <div class="roles"><b>Fall 2025</b> | Designer, Creative Coder | Html, Css, Javascript, Figma</div>
@@ -33,9 +54,13 @@
     </div>
     <p>This logo redesign utilizes track data fetched by the <b>Spotify Audio Features / Track Analysis API</b> 
       to dynamically change the heights of the bars within the Billboard logo, based on 5 pieces of data: 
-      <b>key signature, tempo, duration, energy, and valence.</b>
+      <b>key signature, tempo, duration, energy, and valence (or happiness). The values of these data outputs are then mapped
+      to the heights of the bars, based on a range of preset values: 1 - 12 for key, 60 - 200 for tempo, 0 - 6
+       minutes for duration, 0 - 100 for energy, and 0 - 100 for valence.
+      </b>
       <br><br>
-      Additionally, the website version of the logo animates itself to the audio of the current top song of any chart. 
+      The static version of the logo provides a personalized representation of a given song. Additionally,
+       the website version of the logo animates itself to the audio of the current top song of any chart. 
       <br><br><a href="ruixyan.github.io/billboard/">Try the generator here!</a></p>
     <img class="case-study-image" src="img/logo.png" alt="Project 1" />
     <img class="case-study-image" src="img/billboard_logos.png" alt="Project 1" />
@@ -48,5 +73,6 @@
     <a href="editorial-illustration.html">Next Project</a>
     </div>
     </div>
+    <script src="script.js"></script>
   </body>
 </html>

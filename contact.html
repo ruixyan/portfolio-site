@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Caffeine Chronicles – Rachel Yan</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      /* --- Popup styling --- */
+      .contact-popup {
+        position: fixed;
+        bottom: 80px;
+        right: 40px;
+        background: white;
+        border: 1px solid #ccc;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        padding: 20px;
+        width: 250px;
+        display: none;
+        z-index: 1000;
+        font-family: system-ui, sans-serif;
+        animation: fadeIn 0.2s ease;
+      }
+
+      .contact-popup h3 {
+        margin: 0 0 10px;
+        font-size: 1.1rem;
+      }
+
+      .contact-popup a {
+        color: #333;
+        text-decoration: none;
+      }
+
+      .contact-popup a:hover {
+        text-decoration: underline;
+      }
+
+      .popup-close {
+        position: absolute;
+        top: 8px;
+        right: 10px;
+        cursor: pointer;
+        font-weight: bold;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="navbar">
+      <a href="index.html" class="name">Rachel Yan</a>
+
+      <!-- Hamburger icon -->
+      <div class="menu-toggle" id="menu-toggle">☰</div>
+
+      <nav class="nav">
+        <a href="index.html">Work</a>
+        <a href="play.html">Play</a>
+        <a href="about.html">About</a>
+        <a href="#" id="contact-link">Contact</a>
+      </nav>
+    </div>
+
+    <!-- Contact Popup -->
+    <div class="contact-popup" id="contact-popup">
+      <span class="popup-close" id="popup-close">×</span>
+      <h3>Get in touch</h3>
+      <p><a href="mailto:rachelyan@example.com">rachelyan@example.com</a></p>
+      <p><a href="https://www.linkedin.com/in/rachelyan" target="_blank">LinkedIn</a></p>
+    </div>
+
+    <script>
+      const contactLink = document.getElementById('contact-link');
+      const contactPopup = document.getElementById('contact-popup');
+      const popupClose = document.getElementById('popup-close');
+
+      contactLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        contactPopup.style.display =
+          contactPopup.style.display === 'block' ? 'none' : 'block';
+      });
+
+      popupClose.addEventListener('click', () => {
+        contactPopup.style.display = 'none';
+      });
+
+      // Close popup when clicking outside
+      window.addEventListener('click', (e) => {
+        if (!contactPopup.contains(e.target) && e.target !== contactLink) {
+          contactPopup.style.display = 'none';
+        }
+      });
+    </script>
+  </body>
+</html>

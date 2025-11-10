@@ -147,6 +147,79 @@
     }
   }
   
+/* === ABOUT POPUP === */
+.about-popup {
+  position: fixed;
+  inset: 0;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  background: rgba(20, 20, 20, 0.6);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 2000;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.about-popup.show {
+  display: flex;
+  opacity: 1;
+}
+
+.about-content {
+  background: rgba(255, 255, 255, 0.92);
+  border-radius: 16px;
+  max-width: 520px;
+  padding: 40px;
+  text-align: left;
+  color: #111;
+  font-family: "GeistMono-Regular", monospace;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+  animation: slideUp 0.35s ease forwards;
+  position: relative;
+}
+
+.about-content h1 {
+  font-family: "GeistMono-Bold", monospace;
+  margin-bottom: 12px;
+  font-size: 1.4rem;
+}
+
+.about-content p {
+  line-height: 1.6;
+  font-size: 0.95rem;
+  font-family: "Geist", sans-serif;
+}
+
+.close-btn {
+  position: absolute;
+  top: 14px;
+  right: 18px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #111;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+.close-btn:hover {
+  opacity: 1;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(10px);
+    opacity: 0.8;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+
   /* === WORK PAGE === */
   
   /* featured project */
@@ -670,5 +743,14 @@
       }
     }
     
-  
-  
+/* === SCROLL REVEAL EFFECT === */
+.container, .work {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease-out;
+}
+
+.container.visible, .work.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
