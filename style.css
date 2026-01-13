@@ -36,7 +36,7 @@
   html, body {
     font-family: 'GeistMono', monospace;
     font-size: 16px;
-    line-height: 1.5;
+    line-height: 1.4;
     color: #333;
     /* cursor: crosshair; */
     background-color: #f5f5f5;
@@ -156,7 +156,7 @@
 
 /* Text */
 .about-content p {
-  line-height: 1.65;
+  line-height: 1.4;
   font-size: 0.95rem;
   font-family: "Geist", system-ui, sans-serif;
   color: #222;
@@ -278,7 +278,7 @@
     color: #111;
     margin-bottom: 12px;
     letter-spacing: -0.5px;
-    line-height: 1.5;
+    line-height: 1.2;
   }
 
   .arrow-link {
@@ -796,7 +796,7 @@
 .about-text p {
   font-family: "Geist", sans-serif;
   font-size: 1rem;
-  line-height: 1.5;
+  line-height: 1.4;
   color: #1c1c1c;
   margin-bottom: 16px;
 }
