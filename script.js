@@ -14,26 +14,26 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // --- About popup ---
-  const aboutLink = document.querySelector('.nav a[href="about.html"]');
-  const aboutPopup = document.getElementById('about-popup');
-  const closeAbout = document.getElementById('close-about');
+  // const aboutLink = document.querySelector('.nav a[href="about.html"]');
+  // const aboutPopup = document.getElementById('about-popup');
+  // const closeAbout = document.getElementById('close-about');
 
-  if (aboutLink && aboutPopup && closeAbout) {
-    aboutLink.addEventListener('click', e => {
-      e.preventDefault();
-      aboutPopup.classList.add('show');
-    });
+  // if (aboutLink && aboutPopup && closeAbout) {
+  //   aboutLink.addEventListener('click', e => {
+  //     e.preventDefault();
+  //     aboutPopup.classList.add('show');
+  //   });
 
-    closeAbout.addEventListener('click', () => {
-      aboutPopup.classList.remove('show');
-    });
+  //   closeAbout.addEventListener('click', () => {
+  //     aboutPopup.classList.remove('show');
+  //   });
 
-    window.addEventListener('click', e => {
-      if (e.target === aboutPopup) {
-        aboutPopup.classList.remove('show');
-      }
-    });
-  }
+  //   window.addEventListener('click', e => {
+  //     if (e.target === aboutPopup) {
+  //       aboutPopup.classList.remove('show');
+  //     }
+  //   });
+  // }
 
   // --- Scroll fade-in / reveal ---
   const observer = new IntersectionObserver(entries => {
@@ -48,3 +48,4 @@ document.addEventListener('DOMContentLoaded', () => {
   const elements = document.querySelectorAll('.container, .work');
   elements.forEach(el => observer.observe(el));
 });
+
