@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Immersive Procedural Garden 3D</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;600;800&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/three@0.158.0/build/three.min.js"></script>
+
+<style>
+html,body{
+  margin:0; padding:0;
+  font-family: Inter, system-ui;
+  overflow: hidden;
+  height:100%;
+  background:#0a0a0a;
+}
+
+.hero{
+  position: fixed;
+  inset:0;
+}
+
+canvas{
+  display:block;
+}
+
+.hero-content{
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  z-index:2;
+  pointer-events:none;
+}
+
+h1{
+  font-size:clamp(3rem, 7vw, 6rem);
+  line-height:.95;
+  letter-spacing:-0.03em;
+  color:#fff;
+}
+
+p{
+  margin-top:1rem;
+  color:#aaa;
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-content">
+    <div>
+      <h1>Immersive Garden</h1>
+      <p>Marble · Etching · Animated 3D · Color</p>
+    </div>
+  </div>
+</div>
+
+<script>
+// ---------- THREE.JS SETUP ----------
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(45, window.innerWidth/window.innerHeight, 0.1, 100);
+camera.position.z = 4;
+
+const renderer = new THREE.WebGLRenderer({antialias:true});
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+document.querySelector('.hero').appendChild(renderer.domElement);
+
+// ---------- LIGHTS ----------
+const dirLight = new THREE.DirectionalLight(0xffffff, 1);
+dirLight.position.set(5,5,5);
+scene.add(dirLight);
+
+const ambientLight = new THREE.AmbientLight(0x888888, 0.8);
+scene.add(ambientLight);
+
+// ---------- PLANE GEOMETRY ----------
+const planeGeo = new THREE.PlaneGeometry(5,3,256,256);
+
+// ---------- HELPER FUNCTIONS ----------
+function rand(x){return Math.sin(x*12.9898)*43758.5453 % 1;}
+function smoothNoise(p){return Math.sin(p.x*12.9898+p.y*78.233)*0.5+0.5;}
+
+// ---------- SHADER MATERIAL ----------
+const material = new THREE.ShaderMaterial({
+  uniforms:{
+    uTime: {value:0},
+    uMouse: {value:new THREE.Vector2(0.5,0.5)},
+    uHover: {value:0},
+    uScroll: {value:0}
+  },
+  vertexShader:`
+    varying vec2 vUv;
+    varying float vDepth;
+    uniform float uTime;
+    uniform float uHover;
+
+    float circle(vec2 uv, vec2 pos, float r){
+      return smoothstep(r,0.0,length(uv-pos));
+    }
+
+    void main(){
+      vUv = uv;
+      vec3 pos = position;
+
+      // Marble base displacement
+      float m = sin(uv.x*10.0 + uv.y*5.0 + uTime*0.5)*0.05;
+      pos.z += m;
+
+      // Multiple flowers procedural
+      vec2 flowers[3];
+      flowers[0] = vec2(0.3,0.6);
+      flowers[1] = vec2(0.6,0.5);
+      flowers[2] = vec2(0.5,0.7);
+
+      float etch = 0.0;
+      for(int i=0;i<3;i++){
+        float sway = sin(uTime*2.0+float(i))*0.02;
+        etch += circle(uv,flowers[i]+vec2(sway,0.0),0.08);
+      }
+
+      // Stems
+      float stem = smoothstep(0.01,0.0,abs(uv.x-0.45))*smoothstep(0.3,0.0,uv.y);
+      etch += stem;
+
+      // Bird procedural
+      vec2 bird = vec2(0.55,0.55);
+      float birdF = circle(uv,bird,0.07)*sin(uTime*3.0)*0.5 + 0.5;
+      etch += birdF*0.5;
+
+      pos.z -= etch*0.05*uHover;
+
+      vDepth = pos.z;
+
+      gl_Position = projectionMatrix * modelViewMatrix * vec4(pos,1.0);
+    }
+  `,
+  fragmentShader:`
+    varying vec2 vUv;
+    varying float vDepth;
+    uniform float uTime;
+    uniform float uHover;
+
+    float circle(vec2 uv, vec2 pos, float r){
+      return smoothstep(r,0.0,length(uv-pos));
+    }
+
+    void main(){
+      // Marble base
+      float m = sin(vUv.x*10.0 + vUv.y*5.0 + uTime*0.5)*0.1;
+      vec3 col = vec3(0.9,0.88,0.85)-m*0.1;
+
+      // Flowers color
+      vec2 flowers[3];
+      flowers[0] = vec2(0.3,0.6);
+      flowers[1] = vec2(0.6,0.5);
+      flowers[2] = vec2(0.5,0.7);
+
+      for(int i=0;i<3;i++){
+        float f = circle(vUv,flowers[i]+vec2(sin(uTime*2.0+float(i))*0.02,0.0),0.08)*uHover;
+        col = mix(col,vec3(1.0,0.4,0.7),f); // pink flowers
+      }
+
+      // Stems color
+      float stem = smoothstep(0.01,0.0,abs(vUv.x-0.45))*smoothstep(0.3,0.0,vUv.y)*uHover;
+      col = mix(col,vec3(0.2,0.8,0.3),stem);
+
+      // Bird color
+      vec2 bird = vec2(0.55,0.55);
+      float birdF = circle(vUv,bird,0.07)*uHover;
+      col = mix(col,vec3(0.9,0.9,0.2),birdF); // yellow bird
+
+      gl_FragColor = vec4(col,1.0);
+    }
+  `
+});
+
+const plane = new THREE.Mesh(planeGeo, material);
+scene.add(plane);
+
+// ---------- INTERACTION ----------
+let hover = 0;
+window.addEventListener('mousemove', e=>{
+  const x = e.clientX / window.innerWidth;
+  const y = 1.0 - e.clientY / window.innerHeight;
+  material.uniforms.uMouse.value.set(x,y);
+  hover = 1.0;
+});
+window.addEventListener('mouseout', e=>{hover=0;});
+window.addEventListener('scroll', e=>{
+  material.uniforms.uScroll.value = Math.min(window.scrollY/window.innerHeight,1.0);
+});
+
+// ---------- CAMERA PARALLAX ----------
+window.addEventListener('mousemove', e=>{
+  const offsetX = (e.clientX / window.innerWidth - 0.5)*0.5;
+  const offsetY = (0.5 - e.clientY / window.innerHeight)*0.5;
+  camera.position.x += (offsetX - camera.position.x)*0.05;
+  camera.position.y += (offsetY - camera.position.y)*0.05;
+});
+
+// ---------- ANIMATION LOOP ----------
+function animate(){
+  requestAnimationFrame(animate);
+  material.uniforms.uTime.value += 0.02;
+  material.uniforms.uHover.value += (hover - material.uniforms.uHover.value)*0.05;
+  renderer.render(scene,camera);
+}
+animate();
+
+window.addEventListener('resize', ()=>{
+  camera.aspect = window.innerWidth/window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});
+</script>
+
+</body>
+</html>
