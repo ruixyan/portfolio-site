@@ -6,13 +6,193 @@
   <title>About — Rachel Yan</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
-</head>
+  <style>
 
+    .ry-page {
+      padding-top: 46px;
+      background-color: #f5f5f5;
+      min-height: 100vh;
+    }
+
+    /* ── ROW 1: big name + small photo side by side ── */
+    .ry-top {
+      border-bottom: 1px solid #000;
+      display: grid;
+      grid-template-columns: 1fr 240px;
+      align-items: stretch;
+    }
+
+    .ry-top-left {
+      padding: 48px 32px 40px 24px;
+      border-right: 1px solid #000;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 32px;
+    }
+
+    .ry-name {
+      font-family: "Commit-700", monospace;
+      font-size: clamp(2.8rem, 6vw, 5.5rem);
+      font-weight: 700;
+      line-height: 0.95;
+      letter-spacing: -3px;
+      color: #111;
+    }
+
+    .ry-tagline {
+      font-family: "GeistMono", monospace;
+      font-size: 0.78rem;
+      color: #888;
+      letter-spacing: 0.04em;
+      line-height: 1.5;
+    }
+
+    .ry-top-right {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .ry-photo-wrap {
+      flex: 1;
+      overflow: hidden;
+    }
+
+    .ry-photo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top;
+      display: block;
+      filter: grayscale(100%);
+      transition: filter 0.5s ease;
+    }
+
+    .ry-photo:hover { filter: grayscale(0%); }
+
+    /* ── ROW 2: bio + info + links ── */
+    .ry-mid {
+      border-bottom: 1px solid #000;
+      display: grid;
+      grid-template-columns: 2fr 1.2fr 1fr;
+    }
+
+    .ry-cell {
+      padding: 28px 24px;
+      border-right: 1px solid #000;
+    }
+
+    .ry-cell:last-child { border-right: none; }
+
+    .ry-cell-label {
+      font-family: "GeistMono", monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #bbb;
+      margin-bottom: 14px;
+    }
+
+    .ry-bio p {
+      font-family: "Geist", sans-serif;
+      font-size: 0.95rem;
+      line-height: 1.65;
+      color: #333;
+      margin-bottom: 12px;
+    }
+
+    .ry-bio p:last-child { margin-bottom: 0; }
+
+    /* info table */
+    .ry-info {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .ry-info li {
+      font-family: "GeistMono", monospace;
+      font-size: 0.72rem;
+      color: #333;
+      padding: 8px 0;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .ry-info li span:first-child {
+      font-size: 0.6rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #bbb;
+    }
+
+    /* links */
+    .ry-link-list {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .ry-link-list a {
+      font-family: "GeistMono", monospace;
+      font-size: 0.78rem;
+      color: #111;
+      text-decoration: none;
+      padding: 9px 0;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: color 0.2s;
+    }
+
+    .ry-link-list a:hover { color: #666; }
+
+    .ry-link-list a span {
+      font-size: 0.7rem;
+      color: #ccc;
+    }
+
+    /* ── ROW 3: skills strip ── */
+    .ry-skills-strip {
+      display: flex;
+      flex-wrap: wrap;
+      padding: 16px 24px;
+      gap: 8px;
+      border-bottom: 1px solid #000;
+    }
+
+    .ry-skill {
+      font-family: "Commit-400", monospace;
+      font-size: 0.75rem;
+      padding: 4px 12px;
+      border-radius: 20px;
+      border: 1px solid #ccc;
+      color: #555;
+      transition: border-color 0.2s, color 0.2s;
+      cursor: default;
+    }
+
+    .ry-skill:hover { border-color: #111; color: #111; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .ry-top  { grid-template-columns: 1fr; }
+      .ry-top-right { height: 200px; }
+      .ry-top-left { border-right: none; border-bottom: 1px solid #000; }
+      .ry-mid  { grid-template-columns: 1fr; }
+      .ry-cell { border-right: none; border-bottom: 1px solid #000; }
+      .ry-cell:last-child { border-bottom: none; }
+    }
+
+  </style>
+</head>
 <body>
 
   <div class="navbar">
     <a href="index.html" class="name">RACHEL YAN</a>
-
     <nav class="nav">
       <a href="index.html">Work</a>
       <a href="play.html">Play</a>
@@ -20,39 +200,68 @@
     </nav>
   </div>
 
+  <main class="ry-page">
 
-  <!-- ABOUT PAGE -->
-  <main class="about-page">
+    <!-- ROW 1 -->
+    <div class="ry-top">
+      <div class="ry-top-left">
+        <div class="ry-name">Rachel Yan</div>
+        <div class="ry-tagline">
+          Communication Design, Parsons School of Design<br>
+          New York — Designer &amp; Creative Coder
+        </div>
+      </div>
+      <div class="ry-top-right">
+        <div class="ry-photo-wrap">
+          <img class="ry-photo" src="img/profile.png" alt="Rachel Yan">
+        </div>
+      </div>
+    </div>
 
-    <section class="about-grid">
+    <!-- ROW 2 -->
+    <div class="ry-mid">
 
-      <div class="about-image">
-        <img src="img/profile.png" alt="Rachel Yan portrait">
+      <div class="ry-cell ry-bio">
+        <div class="ry-cell-label">Bio</div>
+        <p>Rachel Yan is a junior at Parsons School of Design, majoring in Communication Design and minoring in Economics. She's a designer and creative coder with an insatiable need to experiment with new techniques and technologies.</p>
+        <p>Her work focuses on using interactivity in its various forms to create engaging and unique experiences. She has a soft spot for monospaced fonts and cats.</p>
       </div>
 
-      <div class="about-text">
-        <p>
-          Rachel Yan is a junior at Parsons School of Design, majoring in
-          Communication Design and minoring in Economics. She’s a designer and
-          creative coder with an insatiable need to experiment with new
-          techniques and technologies to expand her design toolkit.
-        </p>
+      <div class="ry-cell">
+        <div class="ry-cell-label">Info</div>
+        <ul class="ry-info">
+          <li><span>School</span><span>Parsons School of Design</span></li>
+          <li><span>Major</span><span>Communication Design</span></li>
+          <li><span>Minor</span><span>Economics</span></li>
+          <li><span>Year</span><span>Junior</span></li>
+          <li><span>Based</span><span>New York, NY</span></li>
+        </ul>
+      </div>
 
-        <p>
-          Her work focuses on using interactivity in its various forms to create
-          engaging and unique experiences. She has a soft spot for monospaced
-          fonts and cats.
-        </p>
-
-        <div class="about-links">
-          <a href="img/Rachel_Yan_Resume.pdf" download>Resume</a>
-          <a href="https://www.linkedin.com/in/rachel-yan-77a902357/">LinkedIn</a>
-          <a href="mailto:yanpengrui@gmail.com">Email</a>
-          <a href="https://github.com/ruixyan">GitHub</a>
+      <div class="ry-cell">
+        <div class="ry-cell-label">Connect</div>
+        <div class="ry-link-list">
+          <a href="img/Rachel_Yan_Resume.pdf" download>Resume <span>↓</span></a>
+          <a href="https://www.linkedin.com/in/rachel-yan-77a902357/" target="_blank">LinkedIn <span>↗</span></a>
+          <a href="mailto:yanpengrui@gmail.com">Email <span>↗</span></a>
+          <a href="https://github.com/ruixyan" target="_blank">GitHub <span>↗</span></a>
         </div>
-        
+      </div>
 
-    </section>
+    </div>
+
+    <!-- ROW 3: skills -->
+    <div class="ry-skills-strip">
+      <span class="ry-skill">Creative Coding</span>
+      <span class="ry-skill">Web Design</span>
+      <span class="ry-skill">UI / UX</span>
+      <span class="ry-skill">Print Design</span>
+      <span class="ry-skill">Illustration</span>
+      <span class="ry-skill">3D</span>
+      <span class="ry-skill">p5.js</span>
+      <span class="ry-skill">Three.js</span>
+      <span class="ry-skill">Figma</span>
+    </div>
 
   </main>
 

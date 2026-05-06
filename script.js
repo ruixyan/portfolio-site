@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.nav a').forEach(link => {
     link.addEventListener('click', e => {
       const href = link.getAttribute('href');
-      if (href.startsWith('#')) { // only smooth scroll for in-page anchors
+      if (href.startsWith('#')) {
         e.preventDefault();
         const target = document.querySelector(href);
         if (target) {
@@ -13,27 +13,25 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // --- About popup ---
-  // const aboutLink = document.querySelector('.nav a[href="about.html"]');
-  // const aboutPopup = document.getElementById('about-popup');
-  // const closeAbout = document.getElementById('close-about');
+  // --- Filter system ---
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const projectCards = document.querySelectorAll('.container');
 
-  // if (aboutLink && aboutPopup && closeAbout) {
-  //   aboutLink.addEventListener('click', e => {
-  //     e.preventDefault();
-  //     aboutPopup.classList.add('show');
-  //   });
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      // Update active button
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
 
-  //   closeAbout.addEventListener('click', () => {
-  //     aboutPopup.classList.remove('show');
-  //   });
+      const filter = btn.dataset.filter;
 
-  //   window.addEventListener('click', e => {
-  //     if (e.target === aboutPopup) {
-  //       aboutPopup.classList.remove('show');
-  //     }
-  //   });
-  // }
+      projectCards.forEach(card => {
+        const tags = (card.dataset.tags || '').split(',');
+        const show = filter === 'all' || tags.includes(filter);
+        card.style.display = show ? '' : 'none';
+      });
+    });
+  });
 
   // --- Scroll fade-in / reveal ---
   const observer = new IntersectionObserver(entries => {
@@ -48,4 +46,3 @@ document.addEventListener('DOMContentLoaded', () => {
   const elements = document.querySelectorAll('.container, .work');
   elements.forEach(el => observer.observe(el));
 });
-

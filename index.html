@@ -6,13 +6,11 @@
     <title>Rachel Yan</title>
     <link rel="stylesheet" href="style.css" />
     <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
-
   </head>
   <body>
 
     <div class="navbar">
       <a href="index.html" class="name">RACHEL YAN</a>
-
       <nav class="nav">
         <a href="index.html">Work</a>
         <a href="play.html">Play</a>
@@ -20,33 +18,19 @@
       </nav>
     </div>
 
-<!-- === ABOUT POPUP === -->
-<!-- <div class="about-popup" id="about-popup">
-  <div class="about-content">
-    <button class="close-btn" id="close-about">×</button> -->
-    <!-- <h1>Hi, I'm Rachel Yan!</h1> -->
-    <!-- <img class="pfp" src="img/profile.png" alt="Project 1" style="width:50%; height:50%; border-radius:6px;">
-    <p>
-      Rachel Yan is a junior at Parsons School of Design, majoring in Communication Design 
-      and minoring in Economics. She's a designer and creative coder with in an insatiable need to experiment with 
-      new techniques and technologies in order to expand her design toolkit. Her work 
-      is focused on using interactivity in its various forms to create engaging and unique experiences. Has a 
-      soft spot for monospaced fonts and cats. -->
-      
-      <!-- <br><br> Let's work together! You can find me at: -->
-      <!-- <br>
-      <a href="https://www.linkedin.com/in/rachelyan/">LinkedIn</a>
-      <br>
-      <a href="https://www.instagram.com/rachelyan/">Email</a>
-      <br>
-      <a href="https://github.com/ruixyan">GitHub</a>
-    </p>
-  </div>
-</div> -->
-
+    <!-- Filter bar -->
+    <!-- <div class="filter-bar" id="filter-bar">
+      <button class="filter-btn active" data-filter="all">ALL</button>
+      <button class="filter-btn" data-filter="creative-coding">CREATIVE CODING</button>
+      <button class="filter-btn" data-filter="print">PRINT</button>
+      <button class="filter-btn" data-filter="web-design">WEB DESIGN</button>
+      <button class="filter-btn" data-filter="ui-ux">UI/UX</button>
+      <button class="filter-btn" data-filter="three-D">3D</button>
+      <button class="filter-btn" data-filter="illustration">ILLUSTRATION</button>
+    </div> -->
 
     <!-- Featured project -->
-    <div class="container" id="work-top">
+    <div class="container" id="work-top" data-tags="creative-coding,print,web-design">
       <div class="image-container">
         <a href="symbiosis.html">
           <video autoplay loop muted playsinline style="width:100%; border-radius:6px;">
@@ -71,7 +55,7 @@
     </div>
 
     <!-- Other projects -->
-    <div class="container work">
+    <div class="container work" data-tags="creative-coding,print">
       <div class="image-container">
           <a href="billboard.html">
           <img src="img/billboard_cover.png" alt="Project 1"/>
@@ -82,33 +66,30 @@
         <div class="tag-container">
           <div class="tags" id="creative-coding">Creative Coding</div>
           <div class="tags" id="print">Print</div>
-          <!-- <div class="tags">Branding</div> -->
         </div>
         <div class="description">Reimaging Billboard's logo with a generative twist using Hot 100 songs' metadata.</div>
       </div>
     </div>
 
-    <div class="container work">
+    <div class="container work" data-tags="web-design,three-D,illustration">
       <div class="image-container">
-        <a href="editorial-illustration.html">
-        <video autoplay loop muted playsinline style="width:100%; border-radius:6px;">
-          <source src="img/bloomberg_thumbnail.mp4" type="video/mp4">
+        <a href="radar.html">        
+          <video autoplay loop muted playsinline style="width:100%; border-radius:6px;">
+          <source src="img/logo_motion_short.mp4" type="video/mp4">
           Your browser does not support the video tag.
         </video>
       </a>
       </div>
       <div class="text-container">
-        <div class="title">Bloomberg Editorial Illustration</div>
+        <div class="title">radar | WIP</div>
         <div class="tag-container">
-          <div class="tags" id="creative-coding">Creative Coding</div>
-          <div class="tags" id="print">Print</div>
-          <!-- <div class="tags">Branding</div> -->
+          <div class="tags" id="ui-ux">UI/UX</div>
         </div>
-        <div class="description">An interactive illustration for a Bloomberg opinion piece designed for both web and print.</div>
+        <div class="description">An brand identity and app designed for urban explorers.</div>
       </div>
     </div>
 
-    <div class="container work">
+    <div class="container work" data-tags="web-design,three-D,illustration">
       <div class="image-container">
         <a href="caffeine-chronicles.html">        
           <video autoplay loop muted playsinline style="width:100%; border-radius:6px;">
@@ -122,13 +103,31 @@
         <div class="tag-container">
           <div class="tags" id="web-design">Web Design</div>
           <div class="tags" id="three-D">3D</div>
-          <!-- <div class="tags">Branding</div> -->
         </div>
         <div class="description">An online sketchook with pages of web XR experiences detailing ten coffee shop sketches in Manhattan.</div>
       </div>
     </div>
 
-    <div class="container work">
+    <div class="container work" data-tags="creative-coding,print,illustration">
+      <div class="image-container">
+        <a href="editorial-illustration.html">
+        <video autoplay loop muted playsinline style="width:100%; border-radius:6px;">
+          <source src="img/bloomberg_thumbnail.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </a>
+      </div>
+      <div class="text-container">
+        <div class="title">Bloomberg Editorial Illustration</div>
+        <div class="tag-container">
+          <div class="tags" id="creative-coding">Creative Coding</div>
+          <div class="tags" id="print">Print</div>
+        </div>
+        <div class="description">An interactive illustration for a Bloomberg opinion piece designed for both web and print.</div>
+      </div>
+    </div>
+
+    <div class="container work" data-tags="ui-ux">
       <a href="power-on.html">
       <div class="image-container" id="img-background">
         <img src="img/power_on_thumbnail.png" alt="Project 3" />
@@ -138,13 +137,43 @@
         <div class="title">Power Up</div>
         <div class="tag-container">
           <div class="tags" id="ui-ux">UI/UX</div>
-          <!-- <div class="tags">Branding</div> -->
         </div>
         <div class="description">An app designed to help users connect with their community through a period of water and power outage.</div>
       </div>
     </div>
 
-    <div class="container work">
+    <!-- <div class="container work" data-tags="print,illustration">
+      <div class="image-container">
+          <a href="high-in-the-sky.html">
+          <img src="img/insideboxmockup.png" alt="Project 1"/>
+          </a>
+        </div>
+      <div class="text-container">
+        <div class="title">High in the Sky</div>
+        <div class="tag-container">
+          <div class="tags" id="print">Print</div>
+        </div>
+        <div class="description">A baby board book design to teach kids about the different types of clouds.</div>
+      </div>
+    </div> -->
+
+    <!-- <div class="container work" data-tags="print,illustration">
+      <div class="image-container">
+          <a href="cowherd-weaver.html">
+          <img src="img/cover_final.png" alt="Project 1"/>
+          </a>
+        </div>
+      <div class="text-container">
+        <div class="title">Cowherd and the Weaver Girl</div>
+        <div class="tag-container">
+          <div class="tags" id="print">Print</div>
+          <div class="tags" id="illustration">Illustration</div>
+        </div>
+        <div class="description">A baby board book design to teach kids about the different types of clouds.</div>
+      </div>
+    </div> -->
+
+    <div class="container work" data-tags="creative-coding,print,web-design,three-D">
       <div class="image-container">
         <a href="eyes-wide-open.html">        
           <video autoplay loop muted playsinline style="width:100%; border-radius:6px;">
@@ -165,7 +194,7 @@
       </div>
     </div>
 
-    <div class="container work">
+    <div class="container work" data-tags="print">
       <a href="space-station.html">
       <div class="image-container">
         <img src="img/iss_spreads.png" alt="Project 5" />
@@ -175,11 +204,11 @@
         <div class="title">International Space Station</div>
         <div class="tag-container">
           <div class="tags" id="print">Print</div>
-          <!-- <div class="tags">Branding</div> -->
         </div>
         <div class="description">A book designed for the Wikipedia article on the International Space Station</div>
       </div>
     </div>
-<script src="script.js"></script>
+
+    <script src="script.js"></script>
   </body>
 </html>
